@@ -1,0 +1,29 @@
+name: Parameterized cURL Command (KaneAI CI Trigger)
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_plan_id:
+        description: 'The Test Plan ID'
+        required: true
+        default: '01JFVPV3PF36JKJ3FHSKGWPSAB'
+      title:
+        description: 'The Title for the Test Run'
+        required: true
+        default: 'Sample KaneAI CI Run01'
+
+jobs:
+  run-curl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run cURL Command with Parameters
+        run: |
+          curl --location 'https://test-manager-api.lambdatest.com/api/atm/v1/hyperexecute' \
+          --header 'Content-Type: application/json' \
+          --header "Authorization: ${{ secrets.AUTH_HEADER }}" \
+          --data "{
+              \"test_plan_id\": \"${{ github.event.inputs.test_plan_id }}\",
+              \"concurrency\": 2,
+              \"title\": \"${{ github.event.inputs.title }}\",
+              \"region\": \"eastus\"
+          }"
