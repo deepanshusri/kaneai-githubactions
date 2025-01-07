@@ -1,4 +1,4 @@
-# Parameterized Github Actions Setup for KaneAI
+# Parameterized CI Setup with Github Actions for KaneAI
 
 This GitHub Actions workflow allows you to run a parameterized cURL command and showcase how KaneAI tests can be executed via CI setup from Github Action using with dynamic input values for test_run_id, concurrency, title, and region.
 
